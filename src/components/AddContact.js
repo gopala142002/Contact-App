@@ -1,3 +1,5 @@
+//Using class based component
+
 // import React, { Component } from "react";
 // class AddContact extends Component {
 //     state={
@@ -35,39 +37,47 @@
 //     )}
 // };
 // export default AddContact;
+
+//using functional based component
+
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 const AddContact = (props) => {
-    const [name,setName]=useState("");
-    const [email,setEmail]=useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const add = (e) => {
     e.preventDefault();
-    if(name==="" || email==="")
-        alert("All the fields are mandatory!");
-    props.addContactHandler({name,email});
+    if (name === "" || email === "") alert("All the fields are mandatory!");
+    props.addContactHandler({ name, email });
     setName("");
     setEmail("");
   };
   return (
     <div>
       <div className="ui main">
-        <h2>Add contact</h2>
+        <div style={{display:"flex"}}>
+          <h2>Add contact</h2>
+          <div style={{marginLeft:"auto"}}>
+            <Link to="/"><button className="tiny ui button teal">Contact List</button></Link>
+          </div>
+        </div>
         <form action="" className="ui form" onSubmit={add}>
-          <div className="field">
-            <label name="name">Name</label>
+          <div class="field" placeholder="Name">
+            <div class="ui pointing below red basic label">Enter Name</div>
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder="MS Dhoni"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="field">
-            <label name="email">Email</label>
+          <div class="field" placeholder="Email">
+            <div class="ui pointing below red basic label">Enter Email</div>
             <input
               type="text"
               name="email"
-              placeholder="Email"
+              placeholder="xyz@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
