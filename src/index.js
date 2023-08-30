@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import {BrowserRouter as Routers} from 'react-router-dom';
+import {createRoot} from 'react-dom/client'
 import 'semantic-ui-css/semantic.min.css';
-ReactDOM.render(<App/>,document.getElementById("root"));
+createRoot(document.getElementById("root")).render(<App/>);
