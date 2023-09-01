@@ -3,6 +3,7 @@ import Header from './Header';
 import AddContact from './AddContact';
 import ContactList from './ContactList';
 import {v4 as uuid} from 'uuid';
+import ContactDetail from './ContactDetail';
 import { BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import { useState,useEffect} from "react";
 const App=()=>{
@@ -29,10 +30,9 @@ const App=()=>{
             <Router>
                 <Header/>
                 <Routes>
-                    <Route path="/add" exact Component={AddContact}/>
-                    <Route path="/" exact Component={ContactList}/>
-                    {/* <AddContact addContactHandler={addContactHandler}/>
-                    <ContactList contacts={contacts} getContactId={removeContactHandler}/> */}
+                    <Route path="/add" exact Component={()=><AddContact addContactHandler={addContactHandler}/>}/>
+                    <Route path="/" exact Component={()=><ContactList contacts={contacts} getContactId={removeContactHandler}/>}/>
+                    <Route path="/contact/:id" Component={ContactDetail}></Route>
                 </Routes>
             </Router>
         </div>

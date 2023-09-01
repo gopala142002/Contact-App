@@ -1,2 +1,0 @@
--> for CSS used Semantic UI.
--> we pass values to child component with the help of props but for parent to child we use handler.
