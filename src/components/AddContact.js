@@ -1,13 +1,13 @@
 // Using class based component
 
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-class AddContact extends Component {
+import React from "react";
+import {  Link} from "react-router-dom";
+class AddContact extends React.Component {
   state = {
     name: "",
     email: "",
   };
-  add = (e) => {
+  add=(e) => {
     e.preventDefault();
     if (this.state.name === "" || this.state.email === "") {
       alert("All the fields are mandatory!");

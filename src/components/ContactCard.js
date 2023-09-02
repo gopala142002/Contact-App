@@ -16,10 +16,10 @@ const ContactCard = (props) => {
           style={{ marginRight: "10px" }}
         />
         <div className="content">
-          <Link to={{pathname:`/contact/${id}`,state:{contact:props.contact}}}>
+          {/* <Link to={{pathname:`/contact/${id}`,state:{contact:props.contact}}}> */}
             <div className="header">{name}</div>
             <div>{email}</div>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
       <div
