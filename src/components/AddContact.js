@@ -1,118 +1,64 @@
-// Using class based component
-
-import React from "react";
-import {  Link} from "react-router-dom";
-class AddContact extends React.Component {
-  state = {
-    name: "",
-    email: "",
-  };
-  add=(e) => {
+import toast from 'react-hot-toast';
+import React, {useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
+function AddContact({ contacts, setContacts }) {
+  const [state ,setState] = useState({
+    email:'', 
+    name :''
+  })
+  const handleChange = (e) =>{
+    setState({...state, [e.target.name]:e.target.value})
+  } 
+  const navigate = useNavigate();
+  const addContactHandler = (e) => {
     e.preventDefault();
-    if (this.state.name === "" || this.state.email === "") {
+    if (state.name === "" || state.email === "") {
       alert("All the fields are mandatory!");
       return;
     }
-    this.props.addContactHandler(this.state);
-    this.setState({ name: "", email: "" });
-    // this.props.history.push("/");
+    setContacts([...contacts, { id: uuid(), ...state }]);
+    toast.success("Contact Added Successfully")
+    navigate("/");
   };
-  render() {
-    return (
-      <div>
-        <div className="ui main">
-          <div style={{ display: "flex" }}>
-            <h2>Add Contact</h2>
-            <div style={{ marginLeft: "auto" }}>
-              <Link to="/">
-                <button className="tiny ui button teal">Contact List</button>
-              </Link>
-            </div>
+  return (
+    <div>
+      <div className="ui main">
+        <div style={{ display: "flex" }}>
+          <h2>Add Contact</h2>
+          <div style={{ marginLeft: "auto" }}>
+            <Link to="/">
+              <button className="tiny ui button teal">Contact List</button>
+            </Link>
           </div>
-          <form action="" className="ui form" onSubmit={this.add}>
-            <div className="field" placeholder="Name">
-              <div className="ui pointing below red basic label">
-                Enter Name
-              </div>
-              <input
-                type="text"
-                name="name"
-                placeholder="MS Dhoni"
-                value={this.state.name}
-                onChange={(e) => this.setState({ name: e.target.value })}
-              />
-            </div>
-
-            <div className="field" placeholder="Email">
-              <div className="ui pointing below red basic label">
-                Enter Email
-              </div>
-              <input
-                type="text"
-                name="email"
-                placeholder="xyz@gmail.com"
-                value={this.state.email}
-                onChange={(e) => this.setState({ email: e.target.value })}
-              />
-            </div>
-            <button className="teal ui button">Add</button>
-          </form>
         </div>
+        <form action="" className="ui form">
+          <div className="field" placeholder="Name">
+            <div className="ui pointing below red basic label">Enter Name</div>
+            <input
+              type="text"
+              name="name"
+              placeholder="MS Dhoni"
+              value={state.name}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="field" placeholder="Email">
+            <div className="ui pointing below red basic label">Enter Email</div>
+            <input
+              type="text"
+              name="email"
+              placeholder="xyz@gmail.com"
+              value={state.email}
+              onChange={handleChange}
+            />
+          </div>
+          <button className="teal ui button" onClick={addContactHandler}>Add</button>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 export default AddContact;
-
-//using functional based component
-
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// const AddContact = (props) => {
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const add = (e) => {
-//     e.preventDefault();
-//     if (name === "" || email === "") alert("All the fields are mandatory!");
-//     props.addContactHandler({ name, email });
-//     setName("");
-//     setEmail("");
-//     props.history.push("/");
-//   };
-//   return (
-// <div>
-//   <div className="ui main">
-//     <div style={{display:"flex"}}>
-//       <h2>Add contact</h2>
-//       <div style={{marginLeft:"auto"}}>
-//         <Link to="/"><button className="tiny ui button teal">Contact List</button></Link>
-//       </div>
-//     </div>
-//     <form action="" className="ui form" onSubmit={add}>
-// <div className="field" placeholder="Name">
-//   <div className="ui pointing below red basic label">Enter Name</div>
-//   <input
-//     type="text"
-//     name="name"
-//     placeholder="MS Dhoni"
-//     value={name}
-//     onChange={(e) => setName(e.target.value)}
-//   />
-// </div>
-// <div className="field" placeholder="Email">
-//   <div className="ui pointing below red basic label">Enter Email</div>
-//   <input
-//     type="text"
-//     name="email"
-//     placeholder="xyz@gmail.com"
-//     value={email}
-//     onChange={(e) => setEmail(e.target.value)}
-//   />
-// </div>
-//       <button className="teal ui button">Add</button>
-//     </form>
-//   </div>
-// </div>
-//   );
-// };
-// export default AddContact;
