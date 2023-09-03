@@ -10,7 +10,7 @@ const ContactDetail=()=>{
                 <div className="image">
                     <img src={user} alt="user" />
                 </div>
-                <div className="content">
+                <div className="content" style={{textAlign:"center"}}>
                     <div className="header">{name}</div>
                     <div className="description">{email}</div>
                 </div>

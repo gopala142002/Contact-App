@@ -1,8 +1,15 @@
-import React from "react";
 import user from "../images/OIP.jpeg";
 import { Link } from "react-router-dom";
+import toast from 'react-hot-toast';
 const ContactCard = (props) => {
   const { id, name, email } = props.contact;
+  const removeContactHandler = (e) => {
+      const newContacts = props.contacts.filter((contact) => {
+        return contact.id !== id;
+      });
+      props.setContacts(newContacts);
+      toast.success('Contact Removed successfully')
+  };
   return ( 
     <div
       className="item"
@@ -33,7 +40,7 @@ const ContactCard = (props) => {
             color: "red",
             cursor: "pointer",
           }}
-          onClick={() => props.clickHandler(id)}
+          onClick={removeContactHandler}
         />
       </div>
     </div>
